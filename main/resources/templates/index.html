@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table, th, td {
+            border: 2px solid grey;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <title>ziom</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="people">
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>imie</th>
+            <th>nazwisko</th>
+            <th>pensja</th>
+            <th>miasto</th>
+            <th>kod pocztowy</th>
+            <th>ulica</th>
+            <th>numer domu</th>
+            <th>numer telefonu</th>
+        </tr>
+        <tr ng-repeat="x in names">
+            <td>{{ x.id}}</td>
+            <td>{{ x.firstName }}</td>
+            <td>{{ x.lastName}}</td>
+            <td>{{ x.salary}}</td>
+
+
+            <td>{{x.address.locality}}</td>
+            <td>{{x.address.zipCode}}</td>
+            <td>{{x.address.street}}</td>
+            <td>{{x.address.streetNumber}}</td>
+            <td>{{x.phones}}</td>
+
+        </tr>
+    </table>
+
+    <div ng-controller="address">
+    <table>
+        <tr>
+            <th>id</th>
+            <th>miasto</th>
+            <th>kod pocztowy</th>
+            <th>ulica</th>
+            <th>numer ulicy</th>
+
+
+        </tr>
+        <tr ng-repeat="x in address">
+            <td>{{ x.id}}</td>
+            <td>{{ x.locality }}</td>
+            <td>{{ x.zipCode}}</td>
+            <td>{{ x.street}}</td>
+            <td>{{ x.streetNumber}}</td>
+
+
+
+
+        </tr>
+    </table>
+</div>
+
+    <div ng-controller="phone_list">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>numer</th>
+
+
+
+            </tr>
+            <tr ng-repeat="x in phone_list">
+                <td>{{ x.id}}</td>
+                <td>{{ x.number }}</td>
+
+
+
+
+
+            </tr>
+        </table>
+    </div>
+
+    <div ng-controller="registerController">
+        <form action="javascript:void(0);">
+            <h2>Register Form</h2>
+
+        </form>
+        <form>
+
+            <div>
+                <label>Name</label>
+                <input type="text" ng-model="firstName" placeholder="firstName" required="required"
+                       firstName="firstName"
+                       style='margin-left: 10px;'>
+            </div>
+            <div>
+                <label>lastName</label>
+                <input type="text" ng-model="lastName" placeholder="lastName" required="required" lastName="lastName"
+                       style='margin-left: 10px;'>
+            </div>
+            <div>
+                <label>Salary</label>
+                <input type="text" ng-model="salary" placeholder="salary">
+            </div>
+
+            <div>
+                <label>Address_id</label>
+                <input type="text" ng-model="address" placeholder="address_id">
+            </div>
+            <div>
+                <label>id telefonu</label>
+                <input type="text" ng-model="phone" placeholder="phone_id">
+            </div>
+
+            <div>
+                <label>id drugiego telefonu</label>
+                <input type="text" ng-model="phone2" placeholder="phone_id" ng-required="false">
+            </div>
+
+            <button ng-click='Register()' style='margin-top:15px'>register employeer</button>
+
+        </form>
+
+
+        <form action="javascript:void(0);">
+            <h2>Register Form</h2>
+
+        </form>
+        <form>
+
+            <div>
+                <label>locality</label>
+                <input type="text" ng-model="locality" placeholder="locality" required="required"
+
+                       style='margin-left: 10px;'>
+            </div>
+            <div>
+                <label>zipCode</label>
+                <input type="text" ng-model="zipCode" placeholder="zipcode" required="required"
+                       style='margin-left: 10px;'>
+            </div>
+            <div>
+                <label>street</label>
+                <input type="text" ng-model="street" placeholder="street">
+            </div>
+
+            <div>
+                <label>Street number</label>
+                <input type="text" ng-model="streetNumber" placeholder="streetNumber">
+            </div>
+
+
+            <button ng-click='RegisterAddress()' style='margin-top:15px'>dodaj adres </button>
+
+        </form>
+
+        <form>
+
+            <div>
+                <label>number</label>
+                <input type="text" ng-model="number" placeholder="number" required="required"
+
+                       style='margin-left: 10px;'>
+            </div>
+
+
+
+            <button ng-click='Registerphone()' style='margin-top:15px'>dodaj telefon</button>
+
+        </form>
+        <form>
+
+            <div>
+                <label>Name</label>
+                <input type="text" ng-model="firstName" placeholder="firstName" required="required"
+                       firstName="firstName"
+                       style='margin-left: 10px;'>
+            </div>
+            <div>
+                <label>lastName</label>
+                <input type="text" ng-model="lastName" placeholder="lastName" required="required" lastName="lastName"
+                       style='margin-left: 10px;'>
+            </div>
+            <div>
+                <label>Salary</label>
+                <input type="text" ng-model="salary" placeholder="salary">
+            </div>
+
+            <div>
+                <label>Address_id</label>
+                <input type="text" ng-model="address" placeholder="address_id">
+            </div>
+            <div>
+                <label>id telefonu</label>
+                <input type="text" ng-model="phone" placeholder="phone_id">
+            </div>
+
+
+
+            <button ng-click='Register2()' style='margin-top:15px'>register employeer</button>
+
+        </form>
+
+        <form>
+
+            <div>
+                <label>id pracownika do usuniecia</label>
+                <input type="text" ng-model="ziom" placeholder="id" required="required"
+
+                       style='margin-left: 10px;'>
+            </div>
+
+
+
+            <button ng-click='DeleteEmployeer()' style='margin-top:15px'>Usun Pracownika</button>
+
+        </form>
+        <form>
+
+            <div>
+                <label>id addressu do usuniecia</label>
+                <input type="text" ng-model="delete_address" placeholder="id" required="required"
+
+                       style='margin-left: 10px;'>
+            </div>
+
+
+
+            <button ng-click='DeleteAddress()' style='margin-top:15px'>Usun Address</button>
+
+        </form>
+
+        <form>
+
+            <div>
+                <label>id  telefonu do usuniecia</label>
+                <input type="text" ng-model="delete_phone" placeholder="id" required="required"
+
+                       style='margin-left: 10px;'>
+            </div>
+
+
+
+            <button ng-click='DeletePhone()' style='margin-top:15px'>Usun Telefon</button>
+
+        </form>
+
+        <form>
+
+            <div>
+                <label>id</label>
+                <input type="text" ng-model="id" placeholder="salary">
+            </div>
+
+            <div>
+                <label>Name</label>
+                <input type="text" ng-model="firstName2" placeholder="firstName" required="required"
+                       firstName="firstName"
+                       style='margin-left: 10px;'>
+            </div>
+            <div>
+                <label>lastName</label>
+                <input type="text" ng-model="lastName2" placeholder="lastName" required="required" lastName="lastName"
+                       style='margin-left: 10px;'>
+            </div>
+            <div>
+                <label>Salary</label>
+                <input type="text" ng-model="salary2" placeholder="salary">
+            </div>
+
+            <div>
+                <label>Address_id</label>
+                <input type="text" ng-model="address2" placeholder="address_id">
+            </div>
+            <div>
+                <label>id telefonu</label>
+                <input type="text" ng-model="phone2" placeholder="id_phone">
+            </div>
+
+            <button ng-click='UpdatePhone()' style='margin-top:15px'>update employeer</button>
+
+        </form>
+
+
+    </div>
+
+</div>
+<script>
+
+    var app = angular.module('myApp', []);
+    app.controller('registerController', function ($scope, $http) {
+
+
+        var logResult = function (str, data, status, headers, config)
+        {
+            return str + "\n\n" +
+                    "data: " + data + "\n\n" +
+                    "status: " + status + "\n\n" +
+                    "headers: " + jsonFilter(headers()) + "\n\n" +
+                    "config: " + jsonFilter(config);
+        };
+
+        $scope.Register = function () {
+            $http.post("http://localhost:8080/employee/add", {
+                'firstName': $scope.firstName,
+                'lastName': $scope.lastName,
+                'salary': $scope.salary,
+                'address': {"id": $scope.address},
+                'phones': [{"id": $scope.phone}, {"id": $scope.phone2}]
+            })
+                    .success(function (response) {
+                        $scope.usersData = response;
+                        $scope.message = response.message;
+                    })
+
+
+        };
+
+
+
+
+
+        $scope.RegisterAddress = function () {
+            $http.post("http://localhost:8080/address/add", {
+                'locality': $scope.locality,
+                'zipCode': $scope.zipCode,
+                'street': $scope.street,
+                'streetNumber': $scope.streetNumber
+            })
+                    .success(function (response) {
+                        $scope.usersData = response;
+                        $scope.message = response.message;
+                    })
+
+
+        };
+
+        $scope.Registerphone = function () {
+            $http.post(" http://localhost:8080/phone/adds", {
+                'number': $scope.number
+
+            })
+                    .success(function (response) {
+                        $scope.usersData = response;
+                        $scope.message = response.message;
+                    })
+        };
+
+        $scope.UpdatePhone = function () {
+            $http.put("http://localhost:8080/employee/update", {
+                'id': $scope.id,
+                'firstName': $scope.firstName2,
+                'lastName': $scope.lastName2,
+                'salary': $scope.salary2,
+                'address': {"id": $scope.address2},
+                'phones': [{"id": $scope.phone2}]
+            })
+                    .success(function (response) {
+                        $scope.usersData = response;
+                        $scope.message = response.message;
+                    })
+
+
+        };
+
+
+
+
+        $scope.DeleteEmployeer = function () {
+            var ziom = $scope.ziom;
+            var ajdi = ziom.toString();
+            var url = 'http://localhost:8080/employee/delete/' + ajdi;
+
+            $http.delete(url).then(function (response) {
+                console.log('all is good', response.data);
+            }, function (error) {
+                console.log('an error occurred', error.data);
+            });
+        };
+
+
+        $scope.DeleteAddress = function () {
+            var ziom = $scope.delete_address;
+            var ajdi = ziom.toString();
+            var url = 'http://localhost:8080/address/delete/' + ajdi;
+
+            $http.delete(url).then(function (response) {
+                console.log('all is good', response.data);
+            }, function (error) {
+                console.log('an error occurred', error.data);
+            });
+        };
+
+        $scope.DeletePhone = function () {
+            var ziom = $scope.delete_phone;
+            var ajdi = ziom.toString();
+            var url = 'http://localhost:8080/phone/delete/' + ajdi;
+
+            $http.delete(url).then(function (response) {
+                console.log('all is good', response.data);
+            }, function (error) {
+                console.log('an error occurred', error.data);
+            });
+        };
+
+        $scope.Register2 = function () {
+            $http.post("http://localhost:8080/employee/add", {
+                'firstName': $scope.firstName,
+                'lastName': $scope.lastName,
+                'salary': $scope.salary,
+                'address': {"id": $scope.address},
+                'phones': [{"id": $scope.phone}, ]
+            })
+                    .success(function (response) {
+                        $scope.usersData = response;
+                        $scope.message = response.message;
+                    })
+
+
+        };
+
+    });
+
+
+    var app = angular.module('myApp');
+
+
+    app.controller('people', function ($scope, $http) {
+        $http.get('http://localhost:8080/employee/employee')
+                .success(function (response) {
+                    $scope.names = response;
+                });
+    });
+
+
+
+
+    app.controller('address', function ($scope, $http) {
+        $http.get('http://localhost:8080/address/address')
+                .success(function (response) {
+                    $scope.address = response;
+                });
+    });
+
+    app.controller('phone_list', function ($scope, $http) {
+        $http.get('http://localhost:8080/phone')
+                .success(function (response) {
+                    $scope.phone_list = response;
+                });
+    });
+
+</script>
+
+
+</body>
+</html>
+
