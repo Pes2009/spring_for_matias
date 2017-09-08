@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>backoffice</title>
+      <head>
+        <!-- META -->
+                <meta charset="utf-8">
+                <meta name="robots" content="noindex, nofollow">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS -->                
+                <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" id="bootstrap-css">
+                <link rel="stylesheet" href="css/normalize.css">
+                <link rel="stylesheet" href="css/skeleton.css">
+                <link rel="stylesheet" href="https:///maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" > 
+        <!-- JS -->
+              <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+              <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>         
+        </head>
+          <body id="body">
+            <div class="container">
+              <div class="row">
+                    <div class="six columns">
+                      <form>
+                        <fieldset>
+                          <legend>Dodaj promocje:</legend>
+                              link: <input id="link" type="url"><br>
+                              text: <input id="text" type="text"><br>
+                          </fieldset>
+                        </form>
+                        <input type="file" id="files" name="files[]" multiple />
+                       <button id="ziom">Dodaj Nowa Promocje</button>                
+                </div>
+                <div id="div1" class="six columns">
+                <h3> Podgląd </h3>
+                <div id="to_be_saved">                
+                    <output id="list"></output>
+                    </div>
+                    <button id="save">Zapisz</button>   
+              </div>
+            </div>
+        </body>
+
+<script>
+document.getElementById("save").addEventListener("click", saveFunction);
+document.getElementById("ziom").addEventListener("click", myFunction);
+
+function saveFunction() {
+  var sejw = document.getElementById("to_be_saved");
+  console.log(sejw);
+}
+
+function myFunction() {
+    var link = document.getElementById("link");
+    var text = document.getElementById("text");
+
+    var element = document.getElementById("to_be_saved");
+
+
+
+var c_link = document.createElement('a');
+var linkText = document.createTextNode(link.value);
+c_link.appendChild(linkText);
+c_link.title = link.value;
+c_link.href = link.value;
+
+
+
+var c_text = document.createElement("p");
+var text_node = document.createTextNode(text.value);
+c_text.appendChild(text_node);
+    element.appendChild(c_text);
+    element.appendChild(c_link);  
+
+
+}
+
+
+
+
+</script>
+
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+   // Loop through the FileList and render image files as thumbnails.
+   for (var i = 0, f; f = files[i]; i++) {
+
+     // Only process image files.
+     if (!f.type.match('image.*')) {
+       continue;
+     }
+
+     var reader = new FileReader();
+
+     // Closure to capture the file information.
+     reader.onload = (function(theFile) {
+       return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                        '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+    };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+ </script>
+
+  </html>
